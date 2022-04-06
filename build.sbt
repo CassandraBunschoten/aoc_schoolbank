@@ -6,7 +6,9 @@ lazy val root = project
            , version              := "0.1.0"
            , scalaVersion         := scala3Version
            , libraryDependencies ++= Seq(
-               "org.scalacheck" %% "scalacheck" % "1.15.4" % "test",
-               "org.scalatest"  %% "scalatest"  % "3.2.11" % "test"
-             )
+               "org.scalacheck"     %% "scalacheck"   % "1.15.4" % "test",
+               "org.scalatest"      %% "scalatest"    % "3.2.11" % "test",
+               "org.typelevel"      %% "cats-effect"  % "3.3.9",
+               "org.creativescala"  %% "doodle"       % "0.10.1"
+             ) 
            )

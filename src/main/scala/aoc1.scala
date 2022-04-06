@@ -4,7 +4,7 @@ import scala.io.Source
 
 object AOC12020 extends App:
     val expenses = Source
-        .fromFile("fps/src/main/resources/input_aoc1.txt").getLines.map(_.toInt).toList
+        .fromFile("src/main/resources/input_aoc1.txt").getLines.map(_.toInt).toList
 
     def comboTwo: (Int, Int, Int) = 
       (for (

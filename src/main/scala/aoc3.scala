@@ -10,7 +10,7 @@ def move(l: List[(String, Int)], right: Int): Long =
 object AOC32020 extends App:
 
     val input = Source
-      .fromFile("fps/src/main/resources/input_aoc3.txt")
+      .fromFile("src/main/resources/input_aoc3.txt")
       .getLines
       .toList
       .zipWithIndex

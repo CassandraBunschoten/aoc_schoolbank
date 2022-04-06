@@ -31,12 +31,12 @@ object PasswordManager {
 object AOC22020 extends App:
 
     val input = Source
-        .fromFile("fps/src/main/resources/input_aoc2.txt")
+        .fromFile("src/main/resources/input_aoc2.txt")
         .getLines
         .mkString
 
     val testinput = Source
-        .fromFile("fps/src/main/resources/testinput.txt")
+        .fromFile("src/main/resources/testinput.txt")
         .getLines
         .mkString
 

@@ -11,11 +11,10 @@ def getLetters(group: List[String]): List[Char] =
 
 object AOC62020 extends App:
   val groups = Source
-    .fromFile("fps/src/main/resources/input_aoc6.txt")
+    .fromFile("src/main/resources/input_aoc6.txt")
     .mkString
     .split("\n\n")
     .map(_.split("\n").toList)
     .map(getDup(_).length).sum
-
 
   println(groups)

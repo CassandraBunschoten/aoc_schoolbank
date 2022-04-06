@@ -1,7 +1,7 @@
 package aoc2020
 
 import scala.io.Source
-import cats.instances.tailRec
+//import cats.instances.tailRec
 
 def findSeat(s: String): (Int, Int) =
   val row = find((0,127),s.substring(0,7).toCharArray.toList)
@@ -23,7 +23,7 @@ def find(l: (Int, Int), s: List[Char]): Int =
 
 object AOC52020 extends App:
    val x = Source
-    .fromFile("fps/src/main/resources/input_aoc5.txt")
+    .fromFile("src/main/resources/input_aoc5.txt")
     .getLines
     .map(findSeat)
     .map(_ match{ case (row, column) => row * 8 + column})
