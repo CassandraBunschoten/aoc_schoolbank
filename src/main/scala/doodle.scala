@@ -1,3 +1,5 @@
+package x
+
 import doodle.image._
 import doodle.core._
 import doodle.image.syntax.all._
@@ -27,8 +29,8 @@ val circleImage =
   Image.circle(300).strokeWidth(10).fillColor(Color.aquamarine)
     
 object DrawStuff extends App:
-  // chessboard.draw()
-  // circleImage.draw()
+  chessboard.draw()
+  circleImage.draw()
 
   val angleTriangle = Angle(Math.toRadians(60))
   val angleAB = Math.toRadians(120)
