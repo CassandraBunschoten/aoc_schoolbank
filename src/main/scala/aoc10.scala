@@ -34,7 +34,7 @@ def makeTree(lis: List[IntNode]): Long =
 
   
 
-object AOC102020 extends App: 
+object aoc102020 extends App: 
   val input = Source
     .fromFile("src/main/resources/input_aoc10.txt")
     .getLines
