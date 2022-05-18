@@ -1,14 +1,13 @@
 package aoc2020
 
 import scala.io.Source
-import scala.annotation.tailrec
 
-case class Program(mask: BitString, mem: List[Memory]):
-  def execute: List[Memory] =
+case class Program(mask: BitString, mem: List[LocationCell]):
+  def execute: List[LocationCell] =
     mem.map(x => x.copy(value = mask.combine(x.value)))
 
-  def executePart2: List[Memory] = 
-    mem.flatMap(x => mask.combine(x.addressToBitString.address).map(Memory(_, x.value)))
+  def executePart2: List[LocationCell] = 
+    mem.flatMap(x => mask.combine(x.addressToBitString.address).map(LocationCell(_, x.value)))
 
 case class BitString(bitString: String):
   assert(bitString.length == 36)
@@ -21,9 +20,12 @@ case class BitString(bitString: String):
         case ('0', _) => '0'
         ).mkString)
 
-  def combine(other: String): List[String] =
+  def combine(other: Address): List[Address] =
     assert(other.length == 36)
-    def rec(acc: String, tail: List[Char]): List[String] =
+    def rec(acc: String, tail: List[Char]): List[Address] =
+      // tail.headOption.filter(x => x == '0' || x == '1' || x == 'X')
+      // .map(x => rec(acc + x, tail.tail))
+      // .getOrElse()
       tail match
        case Nil      => List(acc)
        case '0' :: t => rec(acc + '0', t)
@@ -37,6 +39,7 @@ case class BitString(bitString: String):
         case ('1', _) => '1'
         case ('0', v) =>  v
         ).toList
+
     rec("", bs)
 
   def toLong: Long =
@@ -47,13 +50,14 @@ case class BitString(bitString: String):
         case _   => sys.error("crash")
     }._1
 
-
-case class Memory(address: String, value: BitString):
-  def addressToBitString: Memory = 
+type Address = String 
+case class LocationCell(address: Address, value: BitString):
+  def addressToBitString: LocationCell = 
     copy(address = leftpad(address.drop(4).dropRight(1).toLong))
 
+    
 def leftpad(i: Long, digits: Int = 36): String =
-    String.format("%" + digits + "s", i.toBinaryString).replace(' ', '0')
+  String.format("%" + digits + "s", i.toBinaryString).replace(' ', '0')
 
 def stringToProgram(input: String): Program = 
   val inputls = input.split("\n")
@@ -61,26 +65,26 @@ def stringToProgram(input: String): Program =
 
   val memory  = inputls.tail.map(s => 
     val array = s.split(" = ")
-    Memory(array(0), BitString(leftpad(array(1).toLong)))).toList
+    LocationCell(array(0), BitString(leftpad(array(1).toLong)))).toList
 
   Program(mask, memory)
 
-
-
 object aoc142020 extends App:
-  val input = Source.fromFile("src/main/resources/input_aoc14.txt")
+  val input: List[Program] = Source.fromFile("src/main/resources/input_aoc14.txt")
                     .mkString
                     .split("mask = ")
                     .toList
                     .tail
                     .map(stringToProgram(_))
-  
-  val mapped = input.flatMap(_.execute).map(x => (x.address, x.value)).toMap 
-  val mapped2 = input.flatMap(_.executePart2).map(x => (x.address, x.value)).toMap 
-  val mem = Memory("mem[42]",BitString("000000000010010000110111111111101111"))
+ 
+  val mapInput: Map[Address, BitString] = input.flatMap(_.executePart2).map(x => (x.address, x.value)).toMap 
+
+  println(mapInput.values.map(_.toLong).sum)
+
+
+  // val loc = LocationCell("mem[42]",BitString("000000000010010000110111111111101111"))
   // println(BitString("000000000000000000000000000000X1001X").combine(mem.addressToBitString.address))
   // println(mem.addressToBitString)
   // println(mapped.values.map(_.toLong).sum)
-  println(mapped2.values.map(_.toLong).sum)
 
                     
