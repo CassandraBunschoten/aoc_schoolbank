@@ -24,9 +24,6 @@ def run(startMap: mutable.Map[Int, (Int, Int)], start: Int, end: Int = 2020): In
 
 
 object aoc15 extends App:
-  // maybe make a map? of number and turn, so it overwrites?
-  // need to have a counter to see which turn it is overall
-  // will also provide an exit case at 2020
 
   val startInput = Source.fromFile("src/main/resources/input_aoc15.txt")
                             .mkString
@@ -42,6 +39,6 @@ object aoc15 extends App:
   val startVal    = startInput.last
 
   println(run(startNumbers, startVal))
-  println(run(startNumbers, startVal, 30000000)
+  println(run(startNumbers, startVal, 30000000))
 
 
