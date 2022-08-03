@@ -23,7 +23,7 @@ def run(startMap: mutable.Map[Int, (Int, Int)], start: Int, end: Int = 2020): In
   oneLine(startMap, start, startCounter)
 
 
-object aoc15 extends App:
+object AOC15 extends App:
 
   val startInput = Source.fromFile("src/main/resources/input_aoc15.txt")
                             .mkString
